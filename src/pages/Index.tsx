@@ -84,7 +84,7 @@ const Index = () => {
     setVoiceEnabled(!voiceEnabled);
     toast({
       title: voiceEnabled ? "Voice output disabled" : "Voice output enabled",
-      description: voiceEnabled ? "ScrlLk will no longer speak" : "ScrlLk will speak responses",
+      description: voiceEnabled ? "ScrLk will no longer speak" : "ScrLk will speak responses",
     });
   };
 
@@ -102,7 +102,7 @@ const Index = () => {
         {chatVisible ? (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-background border-4 border-foreground shadow-2xl animate-scale-in">
             <div className="flex items-center justify-between px-4 py-2 border-b-2 border-foreground bg-muted">
-              <span className="font-mono text-sm font-bold">Chat with ScrlLk</span>
+              <span className="font-mono text-sm font-bold">Chat with ScrLk</span>
               <button
                 onClick={() => setChatVisible(false)}
                 className="px-3 py-1 bg-foreground text-background font-mono text-sm hover:bg-background hover:text-foreground border-2 border-foreground transition-all"
