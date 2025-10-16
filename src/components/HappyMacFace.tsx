@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface HappyMacFaceProps {
@@ -109,8 +109,10 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
   return (
     <div className="relative inline-block w-full max-w-[800px]">
       <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
-        <Canvas style={{ height: '700px', width: '100%' }}>
-          <PerspectiveCamera makeDefault position={[0, 0, 10]} />
+        <Canvas 
+          style={{ height: '700px', width: '100%' }}
+          camera={{ position: [0, 0, 10], fov: 75 }}
+        >
           <OrbitControls 
             enableZoom={true} 
             enablePan={false}
