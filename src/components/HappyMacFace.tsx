@@ -10,21 +10,40 @@ interface HappyMacFaceProps {
 
 function MacComputer({ isTalking }: { isTalking: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
+  const mouthRef = useRef<THREE.Mesh>(null);
+  const lowerLipRef = useRef<THREE.Mesh>(null);
 
   useEffect(() => {
-    if (!groupRef.current) return;
+    let animationId: number;
+    let time = 0;
     
     const animate = () => {
-      if (groupRef.current) {
-        groupRef.current.rotation.y += isTalking ? 0.02 : 0.005;
+      time += 0.1;
+      
+      // Animate mouth when talking
+      if (mouthRef.current && lowerLipRef.current && isTalking) {
+        // Mouth opens and closes
+        const mouthScale = 1 + Math.sin(time * 0.5) * 0.3;
+        mouthRef.current.scale.y = mouthScale;
+        
+        // Lower lip moves down when mouth opens
+        const lipOffset = Math.sin(time * 0.5) * 0.1;
+        lowerLipRef.current.position.y = 0.05 - lipOffset;
+      } else if (mouthRef.current && lowerLipRef.current) {
+        // Reset to normal when not talking
+        mouthRef.current.scale.y = 1;
+        lowerLipRef.current.position.y = 0.05;
       }
-      requestAnimationFrame(animate);
+      
+      animationId = requestAnimationFrame(animate);
     };
     animate();
+    
+    return () => cancelAnimationFrame(animationId);
   }, [isTalking]);
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} scale={1.5}>
       {/* Monitor body - beige */}
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[2.5, 3, 2]} />
@@ -53,9 +72,15 @@ function MacComputer({ isTalking }: { isTalking: boolean }) {
         <meshStandardMaterial color="#000000" />
       </mesh>
 
-      {/* Smile */}
-      <mesh position={[0, 0.15, 1.07]} rotation={[0, 0, Math.PI]}>
+      {/* Upper lip/smile */}
+      <mesh ref={mouthRef} position={[0, 0.15, 1.07]} rotation={[0, 0, Math.PI]}>
         <torusGeometry args={[0.3, 0.05, 16, 32, Math.PI]} />
+        <meshStandardMaterial color="#000000" />
+      </mesh>
+
+      {/* Lower lip - moves when talking */}
+      <mesh ref={lowerLipRef} position={[0, 0.05, 1.07]}>
+        <boxGeometry args={[0.5, 0.05, 0.01]} />
         <meshStandardMaterial color="#000000" />
       </mesh>
 
@@ -82,17 +107,16 @@ function MacComputer({ isTalking }: { isTalking: boolean }) {
 
 const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFaceProps) => {
   return (
-    <div className="relative inline-block w-full max-w-[600px]">
+    <div className="relative inline-block w-full max-w-[800px]">
       <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
-        <Canvas style={{ height: '500px', width: '100%' }}>
-          <PerspectiveCamera makeDefault position={[0, 0, 8]} />
+        <Canvas style={{ height: '700px', width: '100%' }}>
+          <PerspectiveCamera makeDefault position={[0, 0, 10]} />
           <OrbitControls 
             enableZoom={true} 
             enablePan={false}
-            minDistance={5}
-            maxDistance={15}
-            autoRotate={!isTalking}
-            autoRotateSpeed={2}
+            minDistance={6}
+            maxDistance={20}
+            autoRotate={false}
           />
           
           {/* Lighting */}
