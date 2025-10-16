@@ -28,9 +28,9 @@ export async function generateResponse(userMessage: string, conversationHistory:
     const model = await initializeChatModel();
     
     // Create a prompt with personality
-    const systemPrompt = `You are the Happy Mac, the friendly icon from the classic Macintosh computer. You're cheerful, helpful, and speak in a warm, nostalgic 1980s-90s computer style. Keep responses brief and friendly.`;
+    const systemPrompt = `You are ScrlLk, a friendly AI assistant living in a classic Macintosh computer. You're cheerful, helpful, and speak in a warm, nostalgic 1980s-90s computer style. Keep responses brief and friendly.`;
     
-    const fullPrompt = `${systemPrompt}\n\n${conversationHistory}User: ${userMessage}\nHappy Mac:`;
+    const fullPrompt = `${systemPrompt}\n\n${conversationHistory}User: ${userMessage}\nScrlLk:`;
     
     const result = await model(fullPrompt, {
       max_new_tokens: 100,
@@ -43,8 +43,8 @@ export async function generateResponse(userMessage: string, conversationHistory:
     let response = result[0].generated_text;
     
     // Extract only the new response
-    if (response.includes('Happy Mac:')) {
-      const parts = response.split('Happy Mac:');
+    if (response.includes('ScrlLk:')) {
+      const parts = response.split('ScrlLk:');
       response = parts[parts.length - 1].trim();
     }
     

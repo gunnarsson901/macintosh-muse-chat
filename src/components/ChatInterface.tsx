@@ -90,7 +90,7 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
       <div className="flex-1 bg-white border-2 border-black mac-inset overflow-hidden flex flex-col">
         {/* Title Bar */}
         <div className="bg-black text-white px-2 py-1 text-xs font-bold flex items-center justify-between">
-          <span>Happy Mac Chat</span>
+          <span>ScrlLk Chat</span>
           <span className="cursor-pointer">✕</span>
         </div>
 
@@ -99,7 +99,7 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
           <div className="space-y-3">
             {messages.length === 0 && (
               <div className="text-center text-sm text-muted-foreground py-8 font-mono">
-                Hello! I'm the Happy Mac.
+                Hello! I'm ScrlLk.
                 <br />
                 What would you like to talk about?
               </div>
@@ -119,7 +119,7 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
                   }`}
                 >
                   <div className="font-bold text-xs mb-1">
-                    {message.role === 'user' ? '👤 You' : '💻 Happy Mac'}
+                    {message.role === 'user' ? '👤 You' : '💻 ScrlLk'}
                   </div>
                   <div className="whitespace-pre-wrap">{message.content}</div>
                 </div>
@@ -128,7 +128,7 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
             {isLoading && (
               <div className="text-left text-sm font-mono">
                 <div className="inline-block px-3 py-2 border-2 border-black bg-white">
-                  <div className="font-bold text-xs mb-1">💻 Happy Mac</div>
+                  <div className="font-bold text-xs mb-1">💻 ScrlLk</div>
                   <div className="flex gap-1">
                     <span className="cursor-blink">▮</span>
                   </div>
