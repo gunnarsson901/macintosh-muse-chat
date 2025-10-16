@@ -85,14 +85,16 @@ const Index = () => {
   return (
     <MacScreen>
       <div className="h-screen flex flex-col items-center justify-center relative">
-        <HappyMacFace 
-          isThinking={isLoading} 
-          isTalking={isSpeaking}
-        />
+        <div className={`transition-all duration-300 ${chatVisible ? '-translate-y-32 scale-75' : 'translate-y-0 scale-100'}`}>
+          <HappyMacFace 
+            isThinking={isLoading} 
+            isTalking={isSpeaking}
+          />
+        </div>
         
         {/* Collapsible chat overlay */}
         {chatVisible ? (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-background border-4 border-foreground shadow-2xl animate-scale-in">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-background border-4 border-foreground shadow-2xl animate-scale-in">
             <div className="flex items-center justify-between px-4 py-2 border-b-2 border-foreground bg-muted">
               <span className="font-mono text-sm font-bold">Chat with Happy Mac</span>
               <button
@@ -102,7 +104,7 @@ const Index = () => {
                 ✕
               </button>
             </div>
-            <div className="h-[400px]">
+            <div className="h-[350px]">
               <ChatInterface
                 onSendMessage={handleSendMessage}
                 messages={messages}
