@@ -39,15 +39,29 @@ export const useSpeechSynthesis = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     utteranceRef.current = utterance;
 
-    // Try to find a natural-sounding voice
-    const preferredVoice = voices.find(
-      (voice) => voice.lang === 'en-US' && voice.name.includes('Samantha')
-    ) || voices.find(
-      (voice) => voice.lang === 'en-US' && !voice.name.includes('Google')
-    ) || voices[0];
+    // Filter for English voices only
+    const englishVoices = voices.filter(
+      (voice) => voice.lang.startsWith('en-')
+    );
+
+    // Priority list for English voices
+    const preferredVoice = 
+      englishVoices.find((voice) => voice.name.includes('Samantha')) ||
+      englishVoices.find((voice) => voice.lang === 'en-US' && voice.name.includes('Karen')) ||
+      englishVoices.find((voice) => voice.lang === 'en-US' && voice.name.includes('Daniel')) ||
+      englishVoices.find((voice) => voice.lang === 'en-GB' && voice.name.includes('Daniel')) ||
+      englishVoices.find((voice) => voice.lang === 'en-US') ||
+      englishVoices.find((voice) => voice.lang === 'en-GB') ||
+      englishVoices[0];
 
     if (preferredVoice) {
       utterance.voice = preferredVoice;
+      utterance.lang = preferredVoice.lang;
+      console.log('Selected voice:', preferredVoice.name, preferredVoice.lang);
+    } else {
+      // Force English language even if no English voice found
+      utterance.lang = 'en-US';
+      console.warn('No English voice found, using default with en-US language');
     }
 
     utterance.rate = rate;
