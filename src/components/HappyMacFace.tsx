@@ -31,8 +31,8 @@ function MacComputer({ isTalking, mousePosition }: { isTalking: boolean; mousePo
       
       // Follow mouse with smooth rotation
       if (groupRef.current) {
-        const targetRotationY = mousePosition.x * 0.3;
-        const targetRotationX = -mousePosition.y * 0.2;
+        const targetRotationY = mousePosition.x * 0.5;
+        const targetRotationX = mousePosition.y * 0.3;
         
         // Smooth lerp to target rotation
         groupRef.current.rotation.y += (targetRotationY - groupRef.current.rotation.y) * 0.1;
