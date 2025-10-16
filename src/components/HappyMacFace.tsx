@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -8,7 +8,7 @@ interface HappyMacFaceProps {
   isTalking?: boolean;
 }
 
-function MacComputer({ isTalking }: { isTalking: boolean }) {
+function MacComputer({ isTalking, mousePosition }: { isTalking: boolean; mousePosition: { x: number; y: number } }) {
   const groupRef = useRef<THREE.Group>(null);
   const mouthRef = useRef<THREE.Mesh>(null);
 
@@ -29,12 +29,22 @@ function MacComputer({ isTalking }: { isTalking: boolean }) {
         mouthRef.current.scale.y = 1;
       }
       
+      // Follow mouse with smooth rotation
+      if (groupRef.current) {
+        const targetRotationY = mousePosition.x * 0.3;
+        const targetRotationX = -mousePosition.y * 0.2;
+        
+        // Smooth lerp to target rotation
+        groupRef.current.rotation.y += (targetRotationY - groupRef.current.rotation.y) * 0.1;
+        groupRef.current.rotation.x += (targetRotationX - groupRef.current.rotation.x) * 0.1;
+      }
+      
       animationId = requestAnimationFrame(animate);
     };
     animate();
     
     return () => cancelAnimationFrame(animationId);
-  }, [isTalking]);
+  }, [isTalking, mousePosition]);
 
   return (
     <group ref={groupRef} scale={1.5}>
@@ -94,6 +104,20 @@ function MacComputer({ isTalking }: { isTalking: boolean }) {
 }
 
 const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFaceProps) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      // Normalize mouse position to -1 to 1 range
+      const x = (event.clientX / window.innerWidth) * 2 - 1;
+      const y = (event.clientY / window.innerHeight) * 2 - 1;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <div className="relative inline-block w-full max-w-[800px]">
       <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
@@ -116,7 +140,7 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
           <pointLight position={[0, 0, 5]} intensity={0.5} />
           
           {/* Mac Computer */}
-          <MacComputer isTalking={isTalking} />
+          <MacComputer isTalking={isTalking} mousePosition={mousePosition} />
         </Canvas>
       </div>
       {isThinking && (
