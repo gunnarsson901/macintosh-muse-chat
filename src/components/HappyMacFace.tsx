@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import happyMacIcon from '@/assets/happy-mac-icon.png';
+import { useEffect } from 'react';
 
 interface HappyMacFaceProps {
   isThinking?: boolean;
@@ -7,37 +6,32 @@ interface HappyMacFaceProps {
 }
 
 const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFaceProps) => {
-  const [blink, setBlink] = useState(false);
-
   useEffect(() => {
-    // Random blinking effect
-    const blinkInterval = setInterval(() => {
-      setBlink(true);
-      setTimeout(() => setBlink(false), 150);
-    }, Math.random() * 5000 + 3000);
-
-    return () => clearInterval(blinkInterval);
-  }, []);
+    // Auto-rotate the model based on talking state
+    const iframe = document.querySelector('iframe[title="Voxel Macintosh"]') as HTMLIFrameElement;
+    if (iframe && isTalking) {
+      // Could add interaction with Sketchfab API here if needed
+    }
+  }, [isTalking]);
 
   return (
-    <div className="relative inline-block">
-      <img
-        src={happyMacIcon}
-        alt="Happy Mac"
-        className={`w-[400px] h-[400px] object-contain pixel-corners transition-transform duration-200 ${
-          isTalking ? 'scale-105' : 'scale-100'
-        }`}
-        style={{ imageRendering: 'pixelated' }}
-      />
+    <div className="relative inline-block w-full max-w-[600px]">
+      <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
+        <iframe 
+          title="Voxel Macintosh" 
+          className="w-full aspect-square rounded-lg"
+          frameBorder="0" 
+          allowFullScreen 
+          allow="autoplay; fullscreen; xr-spatial-tracking" 
+          src="https://sketchfab.com/models/620bb90715f049b18441938549fcdf4f/embed?autostart=1&preload=1&ui_theme=dark&dnt=1"
+        />
+      </div>
       {isThinking && (
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
           <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
           <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
           <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
         </div>
-      )}
-      {blink && (
-        <div className="absolute inset-0 bg-background"></div>
       )}
     </div>
   );
