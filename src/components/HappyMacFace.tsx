@@ -11,7 +11,6 @@ interface HappyMacFaceProps {
 function MacComputer({ isTalking }: { isTalking: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const mouthRef = useRef<THREE.Mesh>(null);
-  const lowerLipRef = useRef<THREE.Mesh>(null);
 
   useEffect(() => {
     let animationId: number;
@@ -20,19 +19,14 @@ function MacComputer({ isTalking }: { isTalking: boolean }) {
     const animate = () => {
       time += 0.1;
       
-      // Animate mouth when talking
-      if (mouthRef.current && lowerLipRef.current && isTalking) {
-        // Mouth opens and closes
-        const mouthScale = 1 + Math.sin(time * 0.5) * 0.3;
+      // Animate upper lip (smile) when talking
+      if (mouthRef.current && isTalking) {
+        // Mouth opens and closes by scaling vertically
+        const mouthScale = 1 + Math.sin(time * 0.5) * 0.4;
         mouthRef.current.scale.y = mouthScale;
-        
-        // Lower lip moves down when mouth opens
-        const lipOffset = Math.sin(time * 0.5) * 0.1;
-        lowerLipRef.current.position.y = 0.05 - lipOffset;
-      } else if (mouthRef.current && lowerLipRef.current) {
-        // Reset to normal when not talking
+      } else if (mouthRef.current) {
+        // Reset to normal smile when not talking
         mouthRef.current.scale.y = 1;
-        lowerLipRef.current.position.y = 0.05;
       }
       
       animationId = requestAnimationFrame(animate);
@@ -72,15 +66,9 @@ function MacComputer({ isTalking }: { isTalking: boolean }) {
         <meshStandardMaterial color="#000000" />
       </mesh>
 
-      {/* Upper lip/smile */}
+      {/* Smile - animates when talking */}
       <mesh ref={mouthRef} position={[0, 0.15, 1.07]} rotation={[0, 0, Math.PI]}>
         <torusGeometry args={[0.3, 0.05, 16, 32, Math.PI]} />
-        <meshStandardMaterial color="#000000" />
-      </mesh>
-
-      {/* Lower lip - moves when talking */}
-      <mesh ref={lowerLipRef} position={[0, 0.05, 1.07]}>
-        <boxGeometry args={[0.5, 0.05, 0.01]} />
         <meshStandardMaterial color="#000000" />
       </mesh>
 
