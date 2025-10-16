@@ -8,89 +8,86 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Classic Macintosh Color Palette */
+    --mac-beige: 36 20% 88%;
+    --mac-beige-dark: 36 15% 80%;
+    --mac-beige-darker: 36 15% 70%;
+    --mac-screen: 240 60% 80%;
+    --mac-screen-bright: 240 60% 88%;
+    --mac-black: 0 0% 10%;
+    --mac-shadow: 0 0% 30%;
+    
+    --background: var(--mac-beige);
+    --foreground: var(--mac-black);
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: var(--mac-black);
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: var(--mac-black);
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: var(--mac-black);
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: var(--mac-beige-dark);
+    --secondary-foreground: var(--mac-black);
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: var(--mac-beige-dark);
+    --muted-foreground: var(--mac-shadow);
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: var(--mac-screen);
+    --accent-foreground: var(--mac-black);
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: var(--mac-beige-darker);
+    --input: 0 0% 100%;
+    --ring: var(--mac-black);
 
-    --radius: 0.5rem;
+    --radius: 2px;
 
-    --sidebar-background: 0 0% 98%;
+    /* Retro Effects */
+    --scanline-opacity: 0.1;
+    --crt-curve: 0.02;
+    --glow-color: 240 60% 70%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: var(--mac-beige-dark);
+    --sidebar-foreground: var(--mac-black);
+    --sidebar-primary: var(--mac-black);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: var(--mac-beige);
+    --sidebar-accent-foreground: var(--mac-black);
+    --sidebar-border: var(--mac-beige-darker);
+    --sidebar-ring: var(--mac-black);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: var(--mac-black);
+    --foreground: var(--mac-screen-bright);
+    --card: var(--mac-shadow);
+    --card-foreground: var(--mac-screen-bright);
+    --popover: var(--mac-shadow);
+    --popover-foreground: var(--mac-screen-bright);
+    --primary: var(--mac-screen-bright);
+    --primary-foreground: var(--mac-black);
+    --secondary: var(--mac-shadow);
+    --secondary-foreground: var(--mac-screen-bright);
+    --muted: var(--mac-shadow);
+    --muted-foreground: var(--mac-screen);
+    --accent: var(--mac-screen);
+    --accent-foreground: var(--mac-black);
+    --border: var(--mac-shadow);
+    --input: var(--mac-shadow);
+    --ring: var(--mac-screen);
+    --sidebar-background: var(--mac-black);
+    --sidebar-foreground: var(--mac-screen-bright);
+    --sidebar-primary: var(--mac-screen-bright);
+    --sidebar-primary-foreground: var(--mac-black);
+    --sidebar-accent: var(--mac-shadow);
+    --sidebar-accent-foreground: var(--mac-screen-bright);
+    --sidebar-border: var(--mac-shadow);
+    --sidebar-ring: var(--mac-screen);
   }
 }
 
@@ -101,5 +98,120 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Courier New', 'Courier', monospace;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  @font-face {
+    font-family: 'Chicago';
+    src: local('Chicago'), local('ChicagoFLF');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+/* CRT Effects */
+@layer utilities {
+  .crt-screen {
+    position: relative;
+    background: linear-gradient(180deg, hsl(var(--mac-screen-bright)) 0%, hsl(var(--mac-screen)) 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 
+      inset 0 0 40px rgba(0, 0, 0, 0.3),
+      0 0 20px hsl(var(--glow-color) / 0.3);
+  }
+
+  .crt-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .crt-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+  }
+
+  .pixel-corners {
+    border-radius: 0;
+    image-rendering: pixelated;
+  }
+
+  .mac-shadow {
+    box-shadow: 
+      2px 2px 0 hsl(var(--mac-black)),
+      4px 4px 0 hsl(var(--mac-shadow) / 0.5);
+  }
+
+  .mac-inset {
+    box-shadow: 
+      inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+      inset -1px -1px 2px rgba(255, 255, 255, 0.2);
+  }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+  }
+
+  .crt-flicker {
+    animation: flicker 0.15s infinite;
   }
 }
