@@ -16,6 +16,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModelLoading, setIsModelLoading] = useState(true);
   const [showChat, setShowChat] = useState(false);
+  const [chatVisible, setChatVisible] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const { toast } = useToast();
   const { speak, stop: stopSpeaking, isSpeaking, isSupported: speechSynthesisSupported } = useSpeechSynthesis();
@@ -91,40 +92,47 @@ const Index = () => {
 
   return (
     <MacScreen>
-      {!showChat || isModelLoading ? (
-        <div className="h-full flex flex-col items-center justify-center">
-          <HappyMacFace isThinking={isModelLoading} />
-          <div className="text-center mt-4 font-mono text-sm">
-            {isModelLoading ? (
-              <>
-                <p className="font-bold">Loading Happy Mac...</p>
-                <p className="text-xs mt-2">Initializing AI model</p>
-              </>
-            ) : (
-              <p className="font-bold">Welcome!</p>
-            )}
-          </div>
+      {isModelLoading ? (
+        <div className="h-screen flex flex-col items-center justify-center gap-8">
+          <HappyMacFace isThinking={true} />
+          <p className="text-foreground text-center font-mono text-2xl">
+            Loading Happy Mac...
+          </p>
         </div>
       ) : (
-        <div className="h-full grid grid-cols-5 gap-4">
-          {/* Happy Mac Face - Takes up 2 columns */}
-          <div className="col-span-2 flex items-center justify-center">
-            <HappyMacFace 
-              isTalking={isLoading || isSpeaking}
-              isThinking={isLoading}
-            />
-          </div>
-          
-          {/* Chat Interface - Takes up 3 columns */}
-          <div className="col-span-3">
-            <ChatInterface
-              messages={messages}
-              onSendMessage={handleSendMessage}
-              isLoading={isLoading}
-              voiceEnabled={voiceEnabled}
-              onToggleVoice={handleToggleVoice}
-            />
-          </div>
+        <div className="h-screen flex flex-col relative">
+          {!chatVisible ? (
+            <div className="flex flex-col items-center justify-center h-full">
+              <HappyMacFace 
+                isThinking={isLoading} 
+                isTalking={isSpeaking}
+              />
+              <button
+                onClick={() => setChatVisible(true)}
+                className="mt-12 px-12 py-6 bg-foreground text-background font-mono text-2xl border-4 border-foreground hover:bg-background hover:text-foreground transition-all duration-200"
+              >
+                CHAT
+              </button>
+            </div>
+          ) : (
+            <div className="h-full flex flex-col">
+              <div className="flex-shrink-0 flex items-center justify-center py-4">
+                <HappyMacFace 
+                  isThinking={isLoading} 
+                  isTalking={isSpeaking}
+                />
+              </div>
+              <div className="flex-1 min-h-0 px-8 pb-8">
+                <ChatInterface
+                  onSendMessage={handleSendMessage}
+                  messages={messages}
+                  isLoading={isLoading}
+                  voiceEnabled={voiceEnabled}
+                  onToggleVoice={handleToggleVoice}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </MacScreen>

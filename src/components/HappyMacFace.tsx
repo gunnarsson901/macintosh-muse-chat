@@ -20,39 +20,25 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center p-8">
-      <div className="relative">
-        {/* Main Happy Mac Face */}
-        <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
-          <img 
-            src={happyMacIcon} 
-            alt="Happy Mac" 
-            className="w-48 h-48 object-contain pixel-corners"
-            style={{ imageRendering: 'pixelated' }}
-          />
+    <div className="relative inline-block">
+      <img
+        src={happyMacIcon}
+        alt="Happy Mac"
+        className={`w-[400px] h-[400px] object-contain pixel-corners transition-transform duration-200 ${
+          isTalking ? 'scale-105' : 'scale-100'
+        }`}
+        style={{ imageRendering: 'pixelated' }}
+      />
+      {isThinking && (
+        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
+          <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
         </div>
-
-        {/* Thinking dots animation */}
-        {isThinking && (
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            <div className="w-2 h-2 bg-black rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-            <div className="w-2 h-2 bg-black rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-            <div className="w-2 h-2 bg-black rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-          </div>
-        )}
-
-        {/* Blink overlay */}
-        {blink && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-48 h-48 flex items-center justify-center">
-              <div className="flex gap-16 mt-4">
-                <div className="w-8 h-2 bg-black"></div>
-                <div className="w-8 h-2 bg-black"></div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
+      {blink && (
+        <div className="absolute inset-0 bg-background"></div>
+      )}
     </div>
   );
 };
