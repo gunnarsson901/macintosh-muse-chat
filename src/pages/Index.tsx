@@ -4,6 +4,7 @@ import HappyMacFace from '@/components/HappyMacFace';
 import ChatInterface from '@/components/ChatInterface';
 import { initializeChatModel, generateResponse } from '@/utils/aiChat';
 import { useToast } from '@/components/ui/use-toast';
+import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -15,7 +16,9 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModelLoading, setIsModelLoading] = useState(true);
   const [showChat, setShowChat] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
   const { toast } = useToast();
+  const { speak, stop: stopSpeaking, isSpeaking, isSupported: speechSynthesisSupported } = useSpeechSynthesis();
 
   useEffect(() => {
     // Preload the AI model
@@ -58,6 +61,11 @@ const Index = () => {
       
       const assistantMessage: Message = { role: 'assistant', content: response };
       setMessages((prev) => [...prev, assistantMessage]);
+
+      // Speak the response if voice is enabled
+      if (voiceEnabled && speechSynthesisSupported) {
+        speak(response, 1.0, 1.0);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: Message = {
@@ -68,6 +76,17 @@ const Index = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleToggleVoice = () => {
+    if (isSpeaking) {
+      stopSpeaking();
+    }
+    setVoiceEnabled(!voiceEnabled);
+    toast({
+      title: voiceEnabled ? "Voice output disabled" : "Voice output enabled",
+      description: voiceEnabled ? "Happy Mac will no longer speak" : "Happy Mac will speak responses",
+    });
   };
 
   return (
@@ -91,7 +110,7 @@ const Index = () => {
           {/* Happy Mac Face - Takes up 2 columns */}
           <div className="col-span-2 flex items-center justify-center">
             <HappyMacFace 
-              isTalking={isLoading}
+              isTalking={isLoading || isSpeaking}
               isThinking={isLoading}
             />
           </div>
@@ -102,6 +121,8 @@ const Index = () => {
               messages={messages}
               onSendMessage={handleSendMessage}
               isLoading={isLoading}
+              voiceEnabled={voiceEnabled}
+              onToggleVoice={handleToggleVoice}
             />
           </div>
         </div>
