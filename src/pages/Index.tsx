@@ -84,8 +84,8 @@ const Index = () => {
 
   return (
     <MacScreen>
-      <div className="h-screen flex flex-col items-center justify-center relative">
-        <div className={`transition-all duration-300 ${chatVisible ? '-translate-y-32 scale-75' : 'translate-y-0 scale-100'}`}>
+      <div className="h-screen flex flex-col items-center relative overflow-hidden">
+        <div className={`transition-all duration-300 ${chatVisible ? 'pt-4 scale-90' : 'pt-32 scale-100'}`}>
           <HappyMacFace 
             isThinking={isLoading} 
             isTalking={isSpeaking}
