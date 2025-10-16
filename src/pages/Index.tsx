@@ -84,29 +84,25 @@ const Index = () => {
 
   return (
     <MacScreen>
-      <div className="h-screen flex flex-col relative">
-        {!chatVisible ? (
-          <div className="flex flex-col items-center justify-center h-full">
-            <HappyMacFace 
-              isThinking={isLoading} 
-              isTalking={isSpeaking}
-            />
-            <button
-              onClick={() => setChatVisible(true)}
-              className="mt-12 px-12 py-6 bg-foreground text-background font-mono text-2xl border-4 border-foreground hover:bg-background hover:text-foreground transition-all duration-200"
-            >
-              CHAT
-            </button>
-          </div>
-        ) : (
-          <div className="h-full flex flex-col">
-            <div className="flex-shrink-0 flex items-center justify-center py-4">
-              <HappyMacFace 
-                isThinking={isLoading} 
-                isTalking={isSpeaking}
-              />
+      <div className="h-screen flex flex-col items-center justify-center relative">
+        <HappyMacFace 
+          isThinking={isLoading} 
+          isTalking={isSpeaking}
+        />
+        
+        {/* Collapsible chat overlay */}
+        {chatVisible ? (
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-background border-4 border-foreground shadow-2xl animate-scale-in">
+            <div className="flex items-center justify-between px-4 py-2 border-b-2 border-foreground bg-muted">
+              <span className="font-mono text-sm font-bold">Chat with Happy Mac</span>
+              <button
+                onClick={() => setChatVisible(false)}
+                className="px-3 py-1 bg-foreground text-background font-mono text-sm hover:bg-background hover:text-foreground border-2 border-foreground transition-all"
+              >
+                ✕
+              </button>
             </div>
-            <div className="flex-1 min-h-0 px-8 pb-8">
+            <div className="h-[400px]">
               <ChatInterface
                 onSendMessage={handleSendMessage}
                 messages={messages}
@@ -116,6 +112,13 @@ const Index = () => {
               />
             </div>
           </div>
+        ) : (
+          <button
+            onClick={() => setChatVisible(true)}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 px-12 py-4 bg-foreground text-background font-mono text-xl border-4 border-foreground hover:bg-background hover:text-foreground transition-all duration-200 shadow-lg"
+          >
+            CHAT
+          </button>
         )}
       </div>
     </MacScreen>
