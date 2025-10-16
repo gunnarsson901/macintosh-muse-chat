@@ -19,6 +19,11 @@ const Index = () => {
   const { toast } = useToast();
   const { speak, stop: stopSpeaking, isSpeaking, isSupported: speechSynthesisSupported } = useSpeechSynthesis();
 
+  const removeEmojis = (text: string) => {
+    // Remove emojis and other special Unicode characters
+    return text.replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]|[\u{238C}-\u{2454}]|[\u{20D0}-\u{20FF}]/gu, '');
+  };
+
   const handleSendMessage = async (content: string) => {
     const userMessage: Message = { role: 'user', content };
     setMessages((prev) => [...prev, userMessage]);
@@ -45,9 +50,10 @@ const Index = () => {
         onDelta: updateAssistant,
         onDone: () => {
           setIsLoading(false);
-          // Speak the complete response if voice is enabled
+          // Speak the complete response if voice is enabled (without emojis)
           if (voiceEnabled && speechSynthesisSupported && assistantContent) {
-            speak(assistantContent, 1.0, 1.0);
+            const cleanText = removeEmojis(assistantContent);
+            speak(cleanText, 1.0, 1.0);
           }
         },
         onError: (error) => {
