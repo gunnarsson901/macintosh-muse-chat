@@ -39,17 +39,28 @@ export const useSpeechSynthesis = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     utteranceRef.current = utterance;
 
-    // Filter for English voices only
-    const englishVoices = voices.filter(
-      (voice) => voice.lang.startsWith('en-')
+    // Force English language first
+    utterance.lang = 'en-US';
+
+    // Get fresh voice list
+    const availableVoices = window.speechSynthesis.getVoices();
+    console.log('Available voices:', availableVoices.map(v => `${v.name} (${v.lang})`));
+
+    // Only consider English voices (en-US, en-GB, en-AU, etc.)
+    const englishVoices = availableVoices.filter(
+      (voice) => voice.lang.toLowerCase().startsWith('en')
     );
 
-    // Priority list for English voices
+    console.log('English voices:', englishVoices.map(v => `${v.name} (${v.lang})`));
+
+    // Try multiple preferred voices in order
     const preferredVoice = 
-      englishVoices.find((voice) => voice.name.includes('Samantha')) ||
-      englishVoices.find((voice) => voice.lang === 'en-US' && voice.name.includes('Karen')) ||
-      englishVoices.find((voice) => voice.lang === 'en-US' && voice.name.includes('Daniel')) ||
-      englishVoices.find((voice) => voice.lang === 'en-GB' && voice.name.includes('Daniel')) ||
+      englishVoices.find((voice) => voice.name.toLowerCase().includes('samantha')) ||
+      englishVoices.find((voice) => voice.name.toLowerCase().includes('karen')) ||
+      englishVoices.find((voice) => voice.name.toLowerCase().includes('daniel')) ||
+      englishVoices.find((voice) => voice.name.toLowerCase().includes('alex')) ||
+      englishVoices.find((voice) => voice.name.toLowerCase().includes('microsoft') && voice.lang === 'en-US') ||
+      englishVoices.find((voice) => voice.name.toLowerCase().includes('google') && voice.lang === 'en-US') ||
       englishVoices.find((voice) => voice.lang === 'en-US') ||
       englishVoices.find((voice) => voice.lang === 'en-GB') ||
       englishVoices[0];
@@ -57,11 +68,9 @@ export const useSpeechSynthesis = () => {
     if (preferredVoice) {
       utterance.voice = preferredVoice;
       utterance.lang = preferredVoice.lang;
-      console.log('Selected voice:', preferredVoice.name, preferredVoice.lang);
+      console.log('✓ Using voice:', preferredVoice.name, '|', preferredVoice.lang);
     } else {
-      // Force English language even if no English voice found
-      utterance.lang = 'en-US';
-      console.warn('No English voice found, using default with en-US language');
+      console.warn('⚠ No English voice found! Available:', availableVoices.length, 'voices');
     }
 
     utterance.rate = rate;
@@ -82,7 +91,7 @@ export const useSpeechSynthesis = () => {
     };
 
     window.speechSynthesis.speak(utterance);
-  }, [isSupported, voices]);
+  }, [isSupported]);
 
   const stop = useCallback(() => {
     window.speechSynthesis.cancel();
