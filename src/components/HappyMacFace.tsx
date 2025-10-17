@@ -121,8 +121,9 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
     <div className="relative inline-block w-full max-w-[800px]">
       <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
         <Canvas 
-          style={{ height: '700px', width: '100%' }}
+          style={{ height: '700px', width: '800px', maxWidth: '100%' }}
           camera={{ position: [0, 0, 10], fov: 75 }}
+          resize={{ scroll: false, debounce: 0 }}
         >
           {/* Lighting */}
           <ambientLight intensity={0.5} />
