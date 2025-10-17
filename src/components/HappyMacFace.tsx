@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface HappyMacFaceProps {
@@ -125,13 +124,6 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
           style={{ height: '700px', width: '100%' }}
           camera={{ position: [0, 0, 10], fov: 75 }}
         >
-          <OrbitControls 
-            enableZoom={false} 
-            enablePan={false}
-            enableRotate={true}
-            autoRotate={false}
-          />
-          
           {/* Lighting */}
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} intensity={1} />
