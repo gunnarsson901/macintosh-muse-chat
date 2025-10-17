@@ -126,10 +126,9 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
           camera={{ position: [0, 0, 10], fov: 75 }}
         >
           <OrbitControls 
-            enableZoom={true} 
+            enableZoom={false} 
             enablePan={false}
-            minDistance={6}
-            maxDistance={20}
+            enableRotate={true}
             autoRotate={false}
           />
           
