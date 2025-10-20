@@ -103,7 +103,7 @@ const Index = () => {
             <div className="flex items-center justify-center h-full">
               <button
                 onClick={() => setChatVisible(true)}
-                className="px-6 py-1.5 bg-foreground text-background font-mono text-xs border-2 border-foreground hover:bg-background hover:text-foreground transition-all pixel-corners"
+                className="px-8 py-6 bg-black text-white font-mono text-2xl border-4 border-black hover:bg-white hover:text-black transition-all pixel-corners font-bold"
               >
                 CHAT
               </button>

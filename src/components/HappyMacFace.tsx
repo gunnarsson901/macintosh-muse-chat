@@ -120,7 +120,7 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
   return (
     <div className="relative inline-block w-full">
       <Canvas 
-        style={{ height: '140px', width: '512px' }}
+        style={{ height: '280px', width: '800px' }}
         camera={{ position: [0, 0, 10], fov: 75 }}
         resize={{ scroll: false, debounce: 0 }}
       >
@@ -134,10 +134,10 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
         <MacComputer isTalking={isTalking} mousePosition={mousePosition} />
       </Canvas>
       {isThinking && (
-        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
-          <div className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
+          <div className="w-3 h-3 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-3 h-3 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-3 h-3 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
         </div>
       )}
     </div>

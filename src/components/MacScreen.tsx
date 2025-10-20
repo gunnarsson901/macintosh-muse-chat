@@ -6,7 +6,7 @@ interface MacScreenProps {
 
 const MacScreen = ({ children }: MacScreenProps) => {
   return (
-    <div className="h-[342px] w-[512px] mx-auto bg-background overflow-hidden">
+    <div className="h-[600px] w-[800px] mx-auto bg-background overflow-hidden border-4 border-black">
       {children}
     </div>
   );
