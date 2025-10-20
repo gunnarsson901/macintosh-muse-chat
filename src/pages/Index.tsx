@@ -89,39 +89,41 @@ const Index = () => {
   };
 
   return (
-    <MacScreen>
-      <div className="h-full flex flex-col">
-        <div className="flex-shrink-0">
-          <HappyMacFace 
-            isThinking={isLoading} 
-            isTalking={isSpeaking}
-          />
+    <div className="min-h-screen bg-primary">
+      <MacScreen>
+        <div className="h-full flex flex-col">
+          <div className="flex-shrink-0">
+            <HappyMacFace 
+              isThinking={isLoading} 
+              isTalking={isSpeaking}
+            />
+          </div>
+          
+          <div className="flex-1 overflow-hidden">
+            {!chatVisible ? (
+              <div className="flex items-center justify-center h-full min-h-[300px]">
+                <button
+                  onClick={() => setChatVisible(true)}
+                  className="px-6 py-4 md:px-8 md:py-6 bg-primary text-primary-foreground font-mono text-xl md:text-2xl border-4 border-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all pixel-corners font-bold"
+                >
+                  CHAT
+                </button>
+              </div>
+            ) : (
+              <div className="h-full">
+                <ChatInterface
+                  onSendMessage={handleSendMessage}
+                  messages={messages}
+                  isLoading={isLoading}
+                  voiceEnabled={voiceEnabled}
+                  onToggleVoice={handleToggleVoice}
+                />
+              </div>
+            )}
+          </div>
         </div>
-        
-        <div className="flex-1 overflow-hidden">
-          {!chatVisible ? (
-            <div className="flex items-center justify-center h-full">
-              <button
-                onClick={() => setChatVisible(true)}
-                className="px-8 py-6 bg-black text-white font-mono text-2xl border-4 border-black hover:bg-white hover:text-black transition-all pixel-corners font-bold"
-              >
-                CHAT
-              </button>
-            </div>
-          ) : (
-            <div className="h-full">
-              <ChatInterface
-                onSendMessage={handleSendMessage}
-                messages={messages}
-                isLoading={isLoading}
-                voiceEnabled={voiceEnabled}
-                onToggleVoice={handleToggleVoice}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    </MacScreen>
+      </MacScreen>
+    </div>
   );
 };
 

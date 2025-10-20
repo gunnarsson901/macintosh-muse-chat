@@ -118,11 +118,11 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
   }, []);
 
   return (
-    <div className="relative inline-block w-full">
+    <div className="relative w-full">
       <Canvas 
-        style={{ height: '280px', width: '800px' }}
+        style={{ height: '200px', width: '100%' }}
         camera={{ position: [0, 0, 10], fov: 75 }}
-        resize={{ scroll: false, debounce: 0 }}
+        resize={{ scroll: true, debounce: 0 }}
       >
         {/* Lighting */}
         <ambientLight intensity={0.5} />
