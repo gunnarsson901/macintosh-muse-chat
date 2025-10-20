@@ -118,28 +118,26 @@ const HappyMacFace = ({ isThinking = false, isTalking = false }: HappyMacFacePro
   }, []);
 
   return (
-    <div className="relative inline-block w-full max-w-[800px]">
-      <div className={`transition-transform duration-200 ${isTalking ? 'scale-105' : 'scale-100'}`}>
-        <Canvas 
-          style={{ height: '700px', width: '800px', maxWidth: '100%' }}
-          camera={{ position: [0, 0, 10], fov: 75 }}
-          resize={{ scroll: false, debounce: 0 }}
-        >
-          {/* Lighting */}
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[5, 5, 5]} intensity={1} />
-          <directionalLight position={[-5, 5, -5]} intensity={0.5} />
-          <pointLight position={[0, 0, 5]} intensity={0.5} />
-          
-          {/* Mac Computer */}
-          <MacComputer isTalking={isTalking} mousePosition={mousePosition} />
-        </Canvas>
-      </div>
+    <div className="relative inline-block w-full">
+      <Canvas 
+        style={{ height: '140px', width: '512px' }}
+        camera={{ position: [0, 0, 10], fov: 75 }}
+        resize={{ scroll: false, debounce: 0 }}
+      >
+        {/* Lighting */}
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} intensity={1} />
+        <directionalLight position={[-5, 5, -5]} intensity={0.5} />
+        <pointLight position={[0, 0, 5]} intensity={0.5} />
+        
+        {/* Mac Computer */}
+        <MacComputer isTalking={isTalking} mousePosition={mousePosition} />
+      </Canvas>
       {isThinking && (
-        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4">
-          <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-6 h-6 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+          <div className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-1.5 h-1.5 bg-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
         </div>
       )}
     </div>
