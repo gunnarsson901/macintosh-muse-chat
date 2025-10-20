@@ -47,56 +47,56 @@ function MacComputer({ isTalking, mousePosition }: { isTalking: boolean; mousePo
 
   return (
     <group ref={groupRef} scale={1.5}>
-      {/* Monitor body - white */}
+      {/* Monitor body - red */}
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[2.5, 3, 2]} />
-        <meshStandardMaterial color="#FFFFFF" />
+        <meshStandardMaterial color="#FF0000" />
       </mesh>
 
-      {/* Screen - white */}
+      {/* Screen - red */}
       <mesh position={[0, 0.3, 1.01]}>
         <boxGeometry args={[2, 2, 0.1]} />
-        <meshStandardMaterial color="#FFFFFF" />
+        <meshStandardMaterial color="#FF0000" />
       </mesh>
 
-      {/* Happy Mac screen content - white background */}
+      {/* Happy Mac screen content - red background */}
       <mesh position={[0, 0.3, 1.06]}>
         <circleGeometry args={[0.6, 32]} />
-        <meshStandardMaterial color="#FFFFFF" />
+        <meshStandardMaterial color="#FF0000" />
       </mesh>
 
       {/* Eyes */}
       <mesh position={[-0.25, 0.5, 1.07]}>
         <circleGeometry args={[0.1, 16]} />
-        <meshStandardMaterial color="#000000" />
+        <meshStandardMaterial color="#0047AB" />
       </mesh>
       <mesh position={[0.25, 0.5, 1.07]}>
         <circleGeometry args={[0.1, 16]} />
-        <meshStandardMaterial color="#000000" />
+        <meshStandardMaterial color="#0047AB" />
       </mesh>
 
       {/* Smile - animates when talking */}
       <mesh ref={mouthRef} position={[0, 0.15, 1.07]} rotation={[0, 0, Math.PI]}>
         <torusGeometry args={[0.3, 0.05, 16, 32, Math.PI]} />
-        <meshStandardMaterial color="#000000" />
+        <meshStandardMaterial color="#0047AB" />
       </mesh>
 
       {/* Base */}
       <mesh position={[0, -2, 0]}>
         <boxGeometry args={[1.5, 0.5, 1.5]} />
-        <meshStandardMaterial color="#FFFFFF" />
+        <meshStandardMaterial color="#FF0000" />
       </mesh>
 
       {/* Disk drive slot */}
       <mesh position={[0, -0.8, 1.01]}>
         <boxGeometry args={[1.2, 0.2, 0.05]} />
-        <meshStandardMaterial color="#000000" />
+        <meshStandardMaterial color="#0047AB" />
       </mesh>
 
       {/* Apple logo area */}
       <mesh position={[0, -1.8, 1.01]}>
         <circleGeometry args={[0.15, 32]} />
-        <meshStandardMaterial color="#000000" />
+        <meshStandardMaterial color="#0047AB" />
       </mesh>
     </group>
   );

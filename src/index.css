@@ -8,9 +8,9 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Monochrome Display - Pure Black & White */
-    --mono-white: 0 0% 100%;
-    --mono-black: 0 0% 0%;
+    /* High Contrast Display - Blue & Red */
+    --mono-white: 0 100% 50%; /* Bright Red (replacing white) */
+    --mono-black: 220 100% 35%; /* Deep Blue (replacing black) */
     
     --background: var(--mono-white);
     --foreground: var(--mono-black);
