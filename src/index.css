@@ -8,86 +8,76 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Classic Macintosh Color Palette */
-    --mac-beige: 36 20% 88%;
-    --mac-beige-dark: 36 15% 80%;
-    --mac-beige-darker: 36 15% 70%;
-    --mac-screen: 240 60% 80%;
-    --mac-screen-bright: 240 60% 88%;
-    --mac-black: 0 0% 10%;
-    --mac-shadow: 0 0% 30%;
+    /* Monochrome Display - Pure Black & White */
+    --mono-white: 0 0% 100%;
+    --mono-black: 0 0% 0%;
     
-    --background: var(--mac-beige);
-    --foreground: var(--mac-black);
+    --background: var(--mono-white);
+    --foreground: var(--mono-black);
 
-    --card: 0 0% 100%;
-    --card-foreground: var(--mac-black);
+    --card: var(--mono-white);
+    --card-foreground: var(--mono-black);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: var(--mac-black);
+    --popover: var(--mono-white);
+    --popover-foreground: var(--mono-black);
 
-    --primary: var(--mac-black);
-    --primary-foreground: 0 0% 100%;
+    --primary: var(--mono-black);
+    --primary-foreground: var(--mono-white);
 
-    --secondary: var(--mac-beige-dark);
-    --secondary-foreground: var(--mac-black);
+    --secondary: var(--mono-white);
+    --secondary-foreground: var(--mono-black);
 
-    --muted: var(--mac-beige-dark);
-    --muted-foreground: var(--mac-shadow);
+    --muted: var(--mono-white);
+    --muted-foreground: var(--mono-black);
 
-    --accent: var(--mac-screen);
-    --accent-foreground: var(--mac-black);
+    --accent: var(--mono-white);
+    --accent-foreground: var(--mono-black);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: var(--mono-black);
+    --destructive-foreground: var(--mono-white);
 
-    --border: var(--mac-beige-darker);
-    --input: 0 0% 100%;
-    --ring: var(--mac-black);
+    --border: var(--mono-black);
+    --input: var(--mono-white);
+    --ring: var(--mono-black);
 
-    --radius: 2px;
+    --radius: 0px;
 
-    /* Retro Effects */
-    --scanline-opacity: 0.1;
-    --crt-curve: 0.02;
-    --glow-color: 240 60% 70%;
-
-    --sidebar-background: var(--mac-beige-dark);
-    --sidebar-foreground: var(--mac-black);
-    --sidebar-primary: var(--mac-black);
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: var(--mac-beige);
-    --sidebar-accent-foreground: var(--mac-black);
-    --sidebar-border: var(--mac-beige-darker);
-    --sidebar-ring: var(--mac-black);
+    --sidebar-background: var(--mono-white);
+    --sidebar-foreground: var(--mono-black);
+    --sidebar-primary: var(--mono-black);
+    --sidebar-primary-foreground: var(--mono-white);
+    --sidebar-accent: var(--mono-white);
+    --sidebar-accent-foreground: var(--mono-black);
+    --sidebar-border: var(--mono-black);
+    --sidebar-ring: var(--mono-black);
   }
 
   .dark {
-    --background: var(--mac-black);
-    --foreground: var(--mac-screen-bright);
-    --card: var(--mac-shadow);
-    --card-foreground: var(--mac-screen-bright);
-    --popover: var(--mac-shadow);
-    --popover-foreground: var(--mac-screen-bright);
-    --primary: var(--mac-screen-bright);
-    --primary-foreground: var(--mac-black);
-    --secondary: var(--mac-shadow);
-    --secondary-foreground: var(--mac-screen-bright);
-    --muted: var(--mac-shadow);
-    --muted-foreground: var(--mac-screen);
-    --accent: var(--mac-screen);
-    --accent-foreground: var(--mac-black);
-    --border: var(--mac-shadow);
-    --input: var(--mac-shadow);
-    --ring: var(--mac-screen);
-    --sidebar-background: var(--mac-black);
-    --sidebar-foreground: var(--mac-screen-bright);
-    --sidebar-primary: var(--mac-screen-bright);
-    --sidebar-primary-foreground: var(--mac-black);
-    --sidebar-accent: var(--mac-shadow);
-    --sidebar-accent-foreground: var(--mac-screen-bright);
-    --sidebar-border: var(--mac-shadow);
-    --sidebar-ring: var(--mac-screen);
+    --background: var(--mono-black);
+    --foreground: var(--mono-white);
+    --card: var(--mono-black);
+    --card-foreground: var(--mono-white);
+    --popover: var(--mono-black);
+    --popover-foreground: var(--mono-white);
+    --primary: var(--mono-white);
+    --primary-foreground: var(--mono-black);
+    --secondary: var(--mono-black);
+    --secondary-foreground: var(--mono-white);
+    --muted: var(--mono-black);
+    --muted-foreground: var(--mono-white);
+    --accent: var(--mono-black);
+    --accent-foreground: var(--mono-white);
+    --border: var(--mono-white);
+    --input: var(--mono-black);
+    --ring: var(--mono-white);
+    --sidebar-background: var(--mono-black);
+    --sidebar-foreground: var(--mono-white);
+    --sidebar-primary: var(--mono-white);
+    --sidebar-primary-foreground: var(--mono-black);
+    --sidebar-accent: var(--mono-black);
+    --sidebar-accent-foreground: var(--mono-white);
+    --sidebar-border: var(--mono-white);
+    --sidebar-ring: var(--mono-white);
   }
 }
 
@@ -120,15 +110,11 @@ All colors MUST be HSL.
   }
 
   .mac-shadow {
-    box-shadow: 
-      2px 2px 0 hsl(var(--mac-black)),
-      4px 4px 0 hsl(var(--mac-shadow) / 0.5);
+    box-shadow: 2px 2px 0 hsl(var(--mono-black));
   }
 
   .mac-inset {
-    box-shadow: 
-      inset 2px 2px 4px rgba(0, 0, 0, 0.3),
-      inset -1px -1px 2px rgba(255, 255, 255, 0.2);
+    box-shadow: inset 1px 1px 0 hsl(var(--mono-black));
   }
 
   @keyframes blink {

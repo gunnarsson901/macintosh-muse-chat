@@ -47,22 +47,22 @@ function MacComputer({ isTalking, mousePosition }: { isTalking: boolean; mousePo
 
   return (
     <group ref={groupRef} scale={1.5}>
-      {/* Monitor body - beige */}
+      {/* Monitor body - white */}
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[2.5, 3, 2]} />
-        <meshStandardMaterial color="#E8DCC8" />
+        <meshStandardMaterial color="#FFFFFF" />
       </mesh>
 
-      {/* Screen - dark blue/gray */}
+      {/* Screen - white */}
       <mesh position={[0, 0.3, 1.01]}>
         <boxGeometry args={[2, 2, 0.1]} />
-        <meshStandardMaterial color="#4A5568" emissive="#2D3748" emissiveIntensity={0.3} />
+        <meshStandardMaterial color="#FFFFFF" />
       </mesh>
 
-      {/* Happy Mac screen content - glowing */}
+      {/* Happy Mac screen content - white background */}
       <mesh position={[0, 0.3, 1.06]}>
         <circleGeometry args={[0.6, 32]} />
-        <meshStandardMaterial color="#87CEEB" emissive="#87CEEB" emissiveIntensity={isTalking ? 0.8 : 0.4} />
+        <meshStandardMaterial color="#FFFFFF" />
       </mesh>
 
       {/* Eyes */}
@@ -84,19 +84,19 @@ function MacComputer({ isTalking, mousePosition }: { isTalking: boolean; mousePo
       {/* Base */}
       <mesh position={[0, -2, 0]}>
         <boxGeometry args={[1.5, 0.5, 1.5]} />
-        <meshStandardMaterial color="#D4C4A8" />
+        <meshStandardMaterial color="#FFFFFF" />
       </mesh>
 
       {/* Disk drive slot */}
       <mesh position={[0, -0.8, 1.01]}>
         <boxGeometry args={[1.2, 0.2, 0.05]} />
-        <meshStandardMaterial color="#2D3748" />
+        <meshStandardMaterial color="#000000" />
       </mesh>
 
       {/* Apple logo area */}
       <mesh position={[0, -1.8, 1.01]}>
         <circleGeometry args={[0.15, 32]} />
-        <meshStandardMaterial color="#2D3748" />
+        <meshStandardMaterial color="#000000" />
       </mesh>
     </group>
   );

@@ -109,10 +109,10 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
               }`}
             >
               <div
-                className={`inline-block px-1 py-0.5 border border-black max-w-[90%] ${
+                className={`inline-block px-1 py-0.5 border-2 border-black max-w-[90%] ${
                   message.role === 'user'
-                    ? 'bg-mac-beige'
-                    : 'bg-white'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black'
                 }`}
               >
                 <div className="font-bold text-[9px]">
@@ -133,14 +133,14 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
       </ScrollArea>
 
       {/* Input Area */}
-      <form onSubmit={handleSubmit} className="p-1 border-t-2 border-black bg-mac-beige flex-shrink-0">
+      <form onSubmit={handleSubmit} className="p-1 border-t-2 border-black bg-white flex-shrink-0">
         <div className="flex gap-1">
           <Button
             type="button"
             onClick={handleMicClick}
             disabled={isLoading}
-            className={`bg-white border border-black hover:bg-mac-beige text-[10px] p-0.5 h-5 pixel-corners ${
-              isListening ? 'bg-red-100' : ''
+            className={`bg-white border-2 border-black hover:bg-black hover:text-white text-[10px] p-0.5 h-5 pixel-corners ${
+              isListening ? 'bg-black text-white' : ''
             }`}
             title={isListening ? 'Stop' : 'Mic'}
           >
@@ -151,12 +151,12 @@ const ChatInterface = ({ onSendMessage, messages, isLoading, voiceEnabled, onTog
             onChange={(e) => setInput(e.target.value)}
             placeholder={isListening ? "..." : "Type..."}
             disabled={isLoading || isListening}
-            className="flex-1 bg-white border border-black font-mono text-[10px] pixel-corners focus-visible:ring-0 focus-visible:ring-offset-0 h-5 px-1"
+            className="flex-1 bg-white border-2 border-black font-mono text-[10px] pixel-corners focus-visible:ring-0 focus-visible:ring-offset-0 h-5 px-1"
           />
           <Button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="bg-white text-black border border-black hover:bg-mac-beige text-[10px] p-0.5 h-5 pixel-corners"
+            className="bg-white text-black border-2 border-black hover:bg-black hover:text-white text-[10px] p-0.5 h-5 pixel-corners"
           >
             →
           </Button>
